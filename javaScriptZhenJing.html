@@ -66,25 +66,26 @@
 		}
         HashMap15.prototype.get=function(key)
         {  
+		    if(  !(this.containKey(key))){
+			   return null;
+		    }
 		   return this.obj[key];
         }
 		 HashMap15.prototype.put=function(key,value)
         {  
-			if(value == null){
-			   alert("HashMap15.put()  cannt put in the vlaue null");
-			   return false;
-			}
-			return this.obj[key] = value;
+            this.obj[key] = value
+			return true;
         }
-		 HashMap15.prototype.contain=function(key)
+		 HashMap15.prototype.containKey=function(key)
         {   
-			return this.obj[key] != undefined;
+			return key in this.obj
+			//return this.obj[key] != undefined;
         }
          HashMap15.prototype.remove=function(key)
         {
 			delete this.obj[key];
         }
-		function testHashMap(){
+	    	function testHashMap(){
 			 var hash= new HashMap15();
 			 for(var i = 0; i < 10;i++){
 				  var value = i + 2;
@@ -95,14 +96,14 @@
 			 hash.put(100,null);
      	   //  assertEquals(12, hash.get(10)); 
 		  
-			 assertEquals(undefined, hash.get(100)); 
+			 assertEquals(null, hash.get(100)); 
             
 			 assertEquals(true,null == undefined); 
 			
-			 assertEquals(false, hash.contain(100)); 
+			 assertEquals(true, hash.containKey(100)); 
+             assertEquals(false, hash.containKey(101)); 
 
-
-			 assertEquals(undefined, hash.get(10)); 
+			 assertEquals(null, hash.get(10)); 
 		  	 assertEquals(10, hash.get(8)); 
 			 assertEquals("2", hash.get(hash)); 
  		}
