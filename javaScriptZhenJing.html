@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>TestPage Tests</title>
+    <link rel="stylesheet" type="text/css" href="../css/jsUnitStyle.css">
+    <script type="text/javascript" src="../app/jsUnitCore.js"></script>
+    <script type="text/javascript" src="../app/jsUnitTestManager.js"></script>
+    <script type="text/javascript" src="../app/BaseUiManager.js"></script>
+    <script type="text/javascript" src="../app/ClassicUiManager.js"></script>
+    <script type="text/javascript" src="../app/jsUnitParams.js"></script>
+    <script type="text/javascript">
+           
+           //16 16------------------------------------------/
+	 
+	 
+		 var HashMap16 = {
+			  Create :function(){
+			     this.obj = new Object()
+			 },
+			
+		    Put : function(key,value){
+			   this.obj[key] = value;
+			},
+		   	Get : function(key){
+			  return this.obj[key];
+			},
+			Contain : function(key)
+            {
+		       return this.obj[key] != undefined;
+            },
+            Remove : function(key)
+            {
+			   delete this.obj[key];
+            }
+		};
+        //  HashMap16.obj = new Object();
+
+		function testHashMap16(){
+             HashMap16.Create();
+			   for(var i = 0; i < 10;i++){
+				  var value = i + 2;
+			      HashMap16.Put(i, value)  ;
+			 }
+
+			HashMap16.Put(HashMap16,"1");
+			HashMap16.Remove(HashMap16);
+			HashMap16.Remove(19);
+			assertEquals(undefined, HashMap16.Get(19)); 
+			assertEquals(undefined, HashMap16.Get(10)); 
+			assertEquals(10, HashMap16.Get(8)); 
+			assertEquals(undefined, HashMap16.Get(HashMap16));
+			assertEquals(false, HashMap16.Contain(HashMap16));
+		}
+
+
+
+ 
+
+	   //15 15------------------------------------------/
+			
+
+
+        function HashMap15(){
+		   this.obj = new Object();
+		}
+        HashMap15.prototype.get=function(key)
+        {  
+		   return this.obj[key];
+        }
+		 HashMap15.prototype.put=function(key,value)
+        {  
+			if(value == null){
+			   alert("HashMap15.put()  cannt put in the vlaue null");
+			   return false;
+			}
+			return this.obj[key] = value;
+        }
+		 HashMap15.prototype.contain=function(key)
+        {   
+			return this.obj[key] != undefined;
+        }
+         HashMap15.prototype.remove=function(key)
+        {
+			delete this.obj[key];
+        }
+		function testHashMap(){
+			 var hash= new HashMap15();
+			 for(var i = 0; i < 10;i++){
+				  var value = i + 2;
+			      hash.put(i, value)  ;
+			 }
+             hash.put(hash,"1");
+             hash.put(hash,"2");
+			 hash.put(100,null);
+     	   //  assertEquals(12, hash.get(10)); 
+		  
+			 assertEquals(undefined, hash.get(100)); 
+            
+			 assertEquals(true,null == undefined); 
+			
+			 assertEquals(false, hash.contain(100)); 
+
+
+			 assertEquals(undefined, hash.get(10)); 
+		  	 assertEquals(10, hash.get(8)); 
+			 assertEquals("2", hash.get(hash)); 
+ 		}
+
+  
+
+			
+			//13ҳ14------------------------------------------/ 
+			function Persion14(name){
+				this.name= name;
+			};
+			
+			Persion14.prototype.SayHello = function(){
+				return "Hello,Im " +  this.name ;
+			};
+			
+			Persion14.prototype.company ="Microsofy";
+
+			function testPersion14(){
+				var BillGates14 = new Persion14("BillGates14");
+				var SteveJobs14 = new Persion14("SteveJobjs14");
+				SteveJobs14.company  = "Apple";
+				SteveJobs14.SayHello = function(){
+					return "Hi," + this.name + " like " + this.company + " hahahahah ";  
+				}
+				assertEquals("Hello,Im BillGates14", BillGates14.SayHello());  
+				assertEquals("Hi,SteveJobjs14 like Apple hahahahah ", SteveJobs14.SayHello()); 
+               
+               
+			   Persion14.prototype.Retire = function(){
+			      return "Poor " + this.name+",bye"
+			    
+			   }
+                assertEquals("Poor SteveJobjs14,bye", SteveJobs14.Retire()); 
+			}
+
+
+
+		   //13------------------------------------------/ 
+			
+			 function Persion13(name){
+			     this.name= name;
+			 };
+			
+			 Persion13.prototype.SayHello = function()
+			  {
+			      return "Hello,Im " +  this.name ;
+			  };
+			 function Employee13(name,salary)
+			 {
+			    Persion13.call(this,name);
+				this.salary = salary;
+			 };
+
+              Employee13.prototype = new Persion13();
+              Employee13.prototype.ShowMeTheMoney = function()
+			  {
+		         return   this.name +" $ " +this.salary ;
+		      };
+
+               function testPersion13(){
+			      var  BillGates13 = new Persion13("bill");
+			      var  Steve13     = new Employee13("steve",1000);
+				  assertEquals("bill", BillGates13.name);
+	              assertEquals(1000, Steve13.salary);
+                  assertEquals("Hello,Im bill", BillGates13.SayHello());
+				  assertEquals("Hello,Im steve", Steve13.SayHello());
+				  assertEquals("steve $ 1000", Steve13.ShowMeTheMoney());
+			};
+            
+             
+
+ 
+			
+			//12-------------------------------------------/ 
+            function String12(str){
+			    this.str = str;
+				
+			}
+			String12.prototype.trim = function(){
+              this.str = this.str.replace(/\s/g,'');
+              return this.str;
+			}
+            function testString12(){
+				 var s = new String12("12  1");
+				 var result =  s.trim();
+			     assertEquals("121",result);
+			}
+
+
+
+
+			//11-------------------------------------------/ 
+			 
+			 function Persion11(name){
+			     this.name= name;
+			 }
+			 Persion11.prototype.SayHello =function(){
+			   return   "Im "+this.name ;
+			 }
+
+           
+
+            function testPersion11(){
+			  var  BillGates11 = new Persion11("bill");
+			  var Steve11  = new Persion11("steve");
+			  assertEquals(true,BillGates11.SayHello == Steve11.SayHello)
+			}
+
+		 
+
+	        
+    </script>
+</head>
+
+<body>
+    <h1>TestPage Tests</h1>
+</body>
+</html>
